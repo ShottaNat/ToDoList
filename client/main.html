@@ -38,30 +38,38 @@
   </header>
 </template>
 
-<template name="myJumbo">
 
+<template name="myJumbo">
   <section class="jumbotron text-center">
     <div class="container ">
       <h1 class="jumbotron-heading"> Planner </h1>
       <p class="lead text-muted">Glad you found your way here</p>
       <p class="lead text-muted"></p>
+
+      <div class="row justify-content-center md-5">
+        <div class="col-md-4 text-center">
+          <button type="button" class="btn btn-info js-sortPub">Public</button>
+          <button type="button" class="btn btn-info js-sortPri">Private</button>
+          <button type="button" class="btn btn-info js-sortAll">All</button>
+        </div>
+      </div>
+      <p class="lead text-muted"></p>
         <div class="row">
           <div class="col">
-            <!-- {{#if currentUser}}  -->
+             {{#if currentUser}}  
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTaskModal">
               Add your task here
             </button>
-                    <!-- {{/if}} -->
-             <!-- <div class="row my-4 justify-content-around"> --> 
-              <!-- <div class ="col-4 text-center"> --> 
-                 <!-- <div class="btn btn-primary"> --> 
+                     {{/if}} 
+              <div class="row my-4 justify-content-around"> 
+                <div class ="col-4 text-center"> 
+                 <div class="btn btn-primary">  
 
-                    <!-- {{> loginButtons}} -->
-                  <!-- </div> -->
-              <!-- </div> -->
-            <!-- </div> -->
-                       
+                     {{> loginButtons}} 
+                  </div> 
+                </div> 
+              </div>    
 
             <!-- Modal -->
 

@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Session } from 'meteor/session';
 import 'meteor/jkuester:blaze-bs4';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css' // this is the default BS theme as example
@@ -15,7 +16,7 @@ Meteor.subscribe("taskGallery")
 
 Template.tasksLib.helpers({
   allTask() {
-    return taskdb.find();
+    return taskdb.find({puborpriv : true});
   },
 
 userChoice(){ 
@@ -46,9 +47,21 @@ usershow(){
 
 
 Template.myJumbo.events({
+	'click .js-sortPub': function(){
+	console.log("Show all public task");
+	},
+
+	'click .js-sortPri': function(){
+	console.log("Show all private task");
+	},
+ 	'click .js-sortAll': function(){
+	console.log("Show all task");
+	},
+
 	'click .js-addImage'(event, instance){
     console.log("Open modal");
  	 },
+
   	'click .js-exitAdd'(event, instance){
    
     $("#tasName").val("");
@@ -59,23 +72,22 @@ Template.myJumbo.events({
 
 	'click .js-save'(event, instance){
  
-    var puborpriv = 0;  
-    if ($("#privatet").prop("checked")==true)
-      puborpriv = 1    
-    
-		var tasktitle = $('#tasName').val();
-		var tdesc = $ ('#tesdesc').val();
+	    var puborpriv = 0;  
+	    	if ($("#privatet").prop("checked")==true);
+	     	 puborpriv = 1;    
+	    var tasktitle = $('#tasName').val();
+		var taskdesc = $ ('#texdesc').val();
         var fulltask =$('#fuldesc').val();
-
-		taskdb.insert ({
-     "privatet": puborpriv,
+        
+	  taskdb.insert ({
+      "privatet": puborpriv,
 	  "tasName" : tasktitle,
-	  "texdesc" : tdesc,
+	  "texdesc" : taskdesc,
       "fuldesc" : fulltask,
       "completed" : false,
-      // "createdOn": new Date().getTime(),
-      // "createdBy": Meteor.users.findOne({_id:Meteor.userId()}).emails[0].address,
-      // "createdById": Meteor.userId()
+      "createdOn": new Date().getTime(),
+      "createdBy": Meteor.users.findOne({_id:Meteor.userId()}).emails[0].address,
+      "createdById": Meteor.userId()
     
 
 		});
