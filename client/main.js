@@ -16,7 +16,7 @@ Meteor.subscribe("taskGallery")
 
 Template.tasksLib.helpers({
   allTask() {
-    return taskdb.find({puborpriv : true});
+    return taskdb.find();
   },
 
 userChoice(){ 
